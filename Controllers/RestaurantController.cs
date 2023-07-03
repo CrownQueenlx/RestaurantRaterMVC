@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using RestaurantRaterMVC.Services.Restaurant;
+using RestaurantRaterMVC.Services.Restaurants;
 
 namespace RestaurantRaterMVC.Controllers;
 

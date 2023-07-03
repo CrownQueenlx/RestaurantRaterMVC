@@ -9,7 +9,7 @@ public class Rating
     public int Id { get; set; }
 
     [Required, Range(0, 5)]
-    public double Score { get; set; }
+    public double? Score { get; set; }
 
     [Required, ForeignKey(nameof(Restaurant))]
     public int RestaurantId { get; set; }
