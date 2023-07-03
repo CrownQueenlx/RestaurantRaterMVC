@@ -7,8 +7,4 @@
     <UserSecretsId>b066de2d-7301-4ca0-85f5-77b5388058b4</UserSecretsId>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.8" />
-  </ItemGroup>
-
 </Project>
