@@ -1,4 +1,4 @@
-namespace RestaurantRaterMVC.Services.Restaurants;
+namespace RestaurantRaterMVC.Services.Restaurant;
 
 public interface IRestaurantService
 {

@@ -1,6 +1,6 @@
 using RestaurantRaterApi.Data;
 
-namespace RestaurantRaterMVC.Services.Restaurants;
+namespace RestaurantRaterMVC.Services.Restaurant;
 
 public class RestaurantService : IRestaurantService
 {
