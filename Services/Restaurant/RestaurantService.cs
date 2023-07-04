@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using RestaurantRaterApi.Data;
-using RestaurantRaterMVC.Models.Restaurants;
+using RestaurantRaterMVC.Models.Restaurant;
 
 namespace RestaurantRaterMVC.Services.Restaurants;
 
@@ -12,17 +12,48 @@ public class RestaurantService : IRestaurantService
         _context = context;
     }
     public async Task<IEnumerable<RestaurantListItem>> GetAllRestaurantsAsync()
-     {
+    {
         List<RestaurantListItem> restaurants = await _context.Restaurants
         .Include(r => r.Ratings)
         .Select(r => new RestaurantListItem()
         {
             Id = r.Id,
             Name = r.Name,
-            Score = r.AverageRating
+            Score = r.AverageRating ?? 0
         })
-        .ToListAsync();
+        .ToListAsync(); //make into c# list
 
         return restaurants;
+    }
+    public async Task<bool> CreateRestaurantAsync(RestaurantCreate model)
+    {
+        Restaurant entity = new()
+        {
+            Name = model.Name,
+            Location = model.Location
+        };
+        _context.Restaurants.Add(entity);
+
+        return await _context.SaveChangesAsync() == 1;
+    }
+
+    Task<List<RestaurantListItem>> IRestaurantService.GetAllRestaurantsAsync()
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<RestaurantDetail?> GetRestaurantAsync(int id)
+    {
+        Restaurant? restaurant = await _context.Restaurants
+        .Include(r => r.Ratings)
+        .FirstOrDefaultAsync(r => r.Id == id);
+
+        return restaurant is null ? null : new()
+        {
+            Id = restaurant.Id,
+            Name = restaurant.Name,
+            Location = restaurant.Location,
+            Score = restaurant.AverageRating ?? 0 
+        };
     }
 }

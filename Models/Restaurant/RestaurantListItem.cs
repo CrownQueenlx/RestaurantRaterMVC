@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace RestaurantRaterMVC.Models.Restaurants
+namespace RestaurantRaterMVC.Models.Restaurant
 {
     public class RestaurantListItem
     {
@@ -8,6 +8,6 @@ namespace RestaurantRaterMVC.Models.Restaurants
         public string? Name { get; set; }
 
         [Display(Name = "Average Score")]
-        public double? Score { get; set; }
+        public double Score { get; set; }
     }
 }
