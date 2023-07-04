@@ -11,7 +11,7 @@ public class RestaurantService : IRestaurantService
     {
         _context = context;
     }
-    public async Task<IEnumerable<RestaurantListItem>> GetAllRestaurantsAsync()
+    public async Task<List<RestaurantListItem>> GetAllRestaurantsAsync()
     {
         List<RestaurantListItem> restaurants = await _context.Restaurants
         .Include(r => r.Ratings)
@@ -35,11 +35,6 @@ public class RestaurantService : IRestaurantService
         _context.Restaurants.Add(entity);
 
         return await _context.SaveChangesAsync() == 1;
-    }
-
-    Task<List<RestaurantListItem>> IRestaurantService.GetAllRestaurantsAsync()
-    {
-        throw new NotImplementedException();
     }
 
     public async Task<RestaurantDetail?> GetRestaurantAsync(int id)
