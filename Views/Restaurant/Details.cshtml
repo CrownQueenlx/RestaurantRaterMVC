@@ -4,7 +4,12 @@
 }
 
 <h1>@Model.Name</h1>
-<h2>Restaurant Details</h2>
+<div class="d-flex justify-content-between">
+    <h2>Restaurant Details</h2>
+    <a asp-controller="Rating" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-link align-self-center">
+        Add Rating
+    </a>
+</div>
 <hr>
 
 <dl class="row">
@@ -40,7 +45,7 @@
 <div>
     <a asp-action="Index">Back to List</a>
     <span>|</span>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> 
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
     @* asp-route-itemid does not correspond to the rest of the code *@
     @* @Html.ActionLink("Back to List", "Index")|@Html.ActionLink("Edit","Edit", new{id=Model.Id}) *@
 </div>

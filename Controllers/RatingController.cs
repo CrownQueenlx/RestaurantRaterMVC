@@ -22,7 +22,7 @@ public class RatingController : Controller
     public IActionResult Create(int id)
     {
         RatingCreate model = new() { RestaurantId = id};
-        return View();
+        return View(model);
     }
     
     [HttpPost]
