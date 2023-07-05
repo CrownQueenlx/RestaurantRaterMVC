@@ -12,7 +12,7 @@ public class RatingService : IRatingService
         _context = context;
     }
 
-    async Task<bool> CreateRatingAsync(RatingCreate model)
+    public async Task<bool> CreateRatingAsync(RatingCreate model)
     {
         Rating entity = new()
         {
