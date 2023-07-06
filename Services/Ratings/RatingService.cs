@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RestaurantRaterApi.Data;
 using RestaurantRaterMVC.Models.Rating;
@@ -7,9 +8,11 @@ namespace RestaurantRaterMVC.Services.Ratings;
 public class RatingService : IRatingService
 {
     private readonly RestaurantDbContext _context;
-    public RatingService(RestaurantDbContext context)
+    private readonly RatingListItem _rating;
+    public RatingService(RestaurantDbContext context, RatingListItem rating)
     {
         _context = context;
+        _rating = rating;
     }
 
     public async Task<bool> CreateRatingAsync(RatingCreate model)
@@ -51,4 +54,22 @@ public class RatingService : IRatingService
 
         return ratings;
     }
+    public async Task<bool> DeleteRatingAsync(int id)
+    {
+        Rating? entity = await _context.Ratings.FindAsync(id);
+        if (entity is null)
+            return false;
+        var ratings = await _context.Ratings.Where(r => r.RestaurantId == entity.Id);
+        _context.Ratings.Remove(entity);
+        await _context.SaveChangesAsync();
+        return true;
+    }
+    // public async Task<List<RatingListItem>> GetRatingListItemAsync(RatingListItem ratingId)
+    // {
+    //     RatingListItem ratings = new();
+    //     await _rating.tolistAsync();
+    //     (ratingId.Id == ratings.Id);
+    //     return ratings.ToListAsync();
+    // }
+
 }

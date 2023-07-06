@@ -6,7 +6,7 @@ namespace RestaurantRaterApi.Data;
 public class Rating
 {
     [Key]
-    public int Id { get; set; }
+    public int RatingId { get; set; }
 
     [Required, Range(0, 5)]
     public double? Score { get; set; }
