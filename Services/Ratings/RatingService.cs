@@ -8,11 +8,9 @@ namespace RestaurantRaterMVC.Services.Ratings;
 public class RatingService : IRatingService
 {
     private readonly RestaurantDbContext _context;
-    private readonly RatingListItem _rating;
-    public RatingService(RestaurantDbContext context, RatingListItem rating)
+    public RatingService(RestaurantDbContext context)
     {
         _context = context;
-        _rating = rating;
     }
 
     public async Task<bool> CreateRatingAsync(RatingCreate model)
@@ -59,7 +57,6 @@ public class RatingService : IRatingService
         Rating? entity = await _context.Ratings.FindAsync(id);
         if (entity is null)
             return false;
-        var ratings = await _context.Ratings.Where(r => r.RestaurantId == entity.Id);
         _context.Ratings.Remove(entity);
         await _context.SaveChangesAsync();
         return true;
